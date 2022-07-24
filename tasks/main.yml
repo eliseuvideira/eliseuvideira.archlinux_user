@@ -1,0 +1,50 @@
+---
+- block:
+    - block:
+        - set_fact:
+            archlinux_user__groups_list: "{{ archlinux_user__groups + ['wheel'] | unique }}"
+
+        - name: Create Group `wheel`
+          group:
+            name: wheel
+            state: present
+
+        - name: Allow `wheel` Root Privileges
+          become: true
+          become_user: root
+          lineinfile:
+            dest: /etc/doas.conf
+            state: present
+            regexp: "permit.*:wheel"
+            line: "permit nopass :wheel"
+            validate: doas -C %s
+            create: true
+
+      when: archlinux_user__privileged == true
+
+    - block:
+        - set_fact:
+            archlinux_user__groups_list: "{{ archlinux_user__groups | unique }}"
+
+      when: archlinux_user__privileged == false
+
+    - name: Create User
+      become: true
+      become_user: root
+      user:
+        name: "{{ archlinux_user__name }}"
+        shell: /bin/zsh
+        groups: "{{ archlinux_user__groups_list }}"
+        append: true
+
+  when: archlinux_user__state == "present"
+
+- block:
+    - name: Remove User
+      become: true
+      become_user: root
+      user:
+        name: "{{ archlinux_user__name }}"
+        state: absent
+
+  when: archlinux_user__state == "absent"

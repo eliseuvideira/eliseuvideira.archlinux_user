@@ -1,0 +1,4 @@
+---
+archlinux_user__groups: []
+archlinux_user__privileged: true
+archlinux_user__state: present

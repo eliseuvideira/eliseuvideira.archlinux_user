@@ -1,0 +1,15 @@
+galaxy_info:
+  role_name: archlinux_user
+  author: Eliseu Videira
+  description: Setup Arch Linux User
+  license: MIT
+  min_ansible_version: 2.1
+  platforms:
+    - name: ArchLinux
+  galaxy_tags: []
+dependencies:
+  - role: eliseuvideira.archlinux_aur
+    vars:
+      archlinux_aur__packages:
+        - opendoas
+        - zsh
