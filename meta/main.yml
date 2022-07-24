@@ -7,9 +7,3 @@ galaxy_info:
   platforms:
     - name: ArchLinux
   galaxy_tags: []
-dependencies:
-  - role: eliseuvideira.archlinux_aur
-    vars:
-      archlinux_aur__packages:
-        - opendoas
-        - zsh

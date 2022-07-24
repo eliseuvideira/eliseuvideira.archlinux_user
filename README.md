@@ -15,14 +15,6 @@ It should work on any archlinux distribution
 | archlinux_user\_\_privileged | no       | true    | true, false     | true to allow root privileges, false otherwise |
 | archlinux_user\_\_state      | no       | present | present, absent | present to install, absent to remove           |
 
-## Dependencies
-
-    - role: eliseuvideira.archlinux_aur
-      vars:
-        archlinux_aur__packages:
-          - opendoas
-          - zsh
-
 ## Example Playbook
 
     - hosts: archlinux

@@ -1,5 +1,12 @@
 ---
 - block:
+    - name: Install Required Packages
+      pacman:
+        name:
+          - opendoas
+          - zsh
+        state: present
+
     - block:
         - set_fact:
             archlinux_user__groups_list: "{{ archlinux_user__groups + ['wheel'] | unique }}"
